@@ -14,15 +14,14 @@ const userRoute = require("./routes/user")
 const authMiddleware = require("./controller/authMiddleware")
 const dashboardRoute = require("./routes/dashboard")
 const complainformRoute = require("./routes/complainform")  
-
-// const historyRoute = require("./routes/history")
+const historyRoute = require("./routes/history")
 
 const app = express();
  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
-app.use(flash());
+app.use(flash()); 
 
 app.use(session({
   secret: 'your-secdcscdsret-key', // Change this to a strong, random string
@@ -36,7 +35,6 @@ app.use(passport.session());
 //routes
 
 // app.use("", feedbackRoute);
-// app.use("", historyRoute);
 
 //hbs engine
 app.set("view engine", "hbs");
@@ -55,6 +53,8 @@ app.use("", dashboardRoute);
 app.use("", mainRoute);
 app.use("", userRoute);
 app.use("", complainformRoute);
+app.use("", historyRoute);
+ 
 
 
 //DataBase Connection
@@ -67,4 +67,4 @@ async function main() {
 
 app.listen(4000, () => {
   console.log("Server started on port 4000")   
-})  
+})   

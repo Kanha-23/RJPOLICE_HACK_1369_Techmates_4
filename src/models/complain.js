@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const complainFormSchema = new mongoose.Schema({
-  name: {
+  name: { 
     type: String,
     // required: true
   },
@@ -14,8 +14,8 @@ const complainFormSchema = new mongoose.Schema({
     // required: true
   },
   date: {
-    type: Date,
-    // required: true
+    type: Date,  
+    // required: true 
   },
   loc: {
     type: String,
@@ -50,11 +50,9 @@ const complainFormSchema = new mongoose.Schema({
     enum: ['aadhar', 'pan', 'voterID'],
     // required: true
   },
-  // You might want to store the uploaded file information, for example, the file path or a reference
-  // You can customize this based on your storage solution (e.g., AWS S3, local storage, etc.)
+  
   proof: {
-    type: String, // Assuming you store the file path or reference as a string
-    // required: true
+    type: String, 
   }
 });
 

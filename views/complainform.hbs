@@ -131,33 +131,6 @@
     </div>
 
     <!-- Include this script in your HTML file -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
 
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault();
-
-      // Use fetch or your preferred method to submit the form data
-      const formData = new FormData(form);
-      const response = await fetch('/complainform', {
-        method: 'POST',
-        body: formData
-      });
-
-      const responseData = await response.json();
-
-      if (response.ok) {
-        // Form submitted successfully, display an alert
-        alert(responseData.message);
-        // Redirect to the dashboard route
-        window.location.href = '/dashboard';
-      } else {
-        // Handle errors or display an error message
-        alert('Form submission failed. Please try again.');
-      }
-    });
-  });
-</script>
 </body>
 </html>
