@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const complainFormSchema = new mongoose.Schema({
-  name: { 
+  name: {
     type: String,
     // required: true
   },
   number: {
-    type: String, // Assuming the phone number can be stored as a string
+    type: String,
     // required: true
   },
   email: {
@@ -14,8 +14,8 @@ const complainFormSchema = new mongoose.Schema({
     // required: true
   },
   date: {
-    type: Date,  
-    // required: true 
+    type: Date,
+    // required: true
   },
   loc: {
     type: String,
@@ -26,14 +26,14 @@ const complainFormSchema = new mongoose.Schema({
     // required: true
   },
   city: {
-    type: String,
+    type: String, 
     // required: true
   },
   state: {
     type: String,
     // required: true
   },
-  country: {
+  district: {
     type: String,
     // required: true
   },
@@ -50,12 +50,43 @@ const complainFormSchema = new mongoose.Schema({
     enum: ['aadhar', 'pan', 'voterID'],
     // required: true
   },
-  
   proof: {
-    type: String, 
+    type: String,
+  },
+  // Additional Fields
+  occupation: {
+    type: String,
+  },
+  age: {
+    type: Number,
+  },
+  detail: {
+    type: String,
+  },
+  aname: {
+    type: String,
+  },
+  aage: {
+    type: Number,
+  },
+  aaddress: {
+    type: String,
+  },
+  aoccupation: {
+    type: String,
+  },
+  acity: {
+    type: String,
+  },
+  adistrict: {
+    type: String,
+  },
+  astate: {
+    type: String,
   }
 });
 
 const Complain = mongoose.model("Complain", complainFormSchema);
 
 module.exports = Complain;
+ 

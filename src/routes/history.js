@@ -11,7 +11,7 @@ routes.get("/history", async (req, res) => {
     } catch (error) {
         console.error("Error fetching all data:", error);
         res.status(500).send("An error occurred while fetching all data.");
-    }
+    } 
 });
 
 

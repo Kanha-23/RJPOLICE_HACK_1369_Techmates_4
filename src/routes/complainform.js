@@ -17,15 +17,31 @@ router.post('/complainform', async (req, res, next) => {
             number: req.body.number,
             email: req.body.email,
             date: req.body.date,
+            address: req.body.address,
+            occupation: req.body.occupation,
+            age: req.body.age,
             loc: req.body.loc,
             pin: req.body.pin,
             city: req.body.city,
+            district: req.body.district,
             state: req.body.state,
-            country: req.body.country,
             dis: req.body.dis,
+            detail: req.body.detail,
             people: req.body.people,
             identityProof: req.body.identityProof,
-            proof: req.body.proof 
+            proof: req.body.proof,
+
+            aname: req.body.aname,
+            aage: req.body.aage,
+            aaddress: req.body.aaddress,
+            aoccupation: req.body.aoccupation,
+            acity: req.body.acity,
+            adistrict: req.body.adistrict,
+            astate: req.body.astate
+
+
+
+
         });
         await newComplainForm.save();
         res.redirect("/dashboard"); 
