@@ -26,7 +26,7 @@ routes.post("/history/search", async (req, res) => {
 
         // Check if a search term is provided
         if (req.body.searchTerm && req.body.searchType !== 'all') {
-            const searchTerm = req.body.searchTerm.trim();
+            const searchTerm = req.body.searchTerm.trim(); 
             // Use a case-insensitive regular expression for searching
             const regex = new RegExp(searchTerm, 'i');
 

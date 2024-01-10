@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const complainFormSchema = new mongoose.Schema({
   name: {
-    type: String,
+    type: String, 
     // required: true
-  },
+  }, 
   number: {
     type: String,
     // required: true
@@ -22,7 +22,7 @@ const complainFormSchema = new mongoose.Schema({
     // required: true
   },
   pin: {
-    type: String,
+    type: String, 
     // required: true
   },
   city: {

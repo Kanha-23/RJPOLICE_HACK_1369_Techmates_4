@@ -4,12 +4,12 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const users = mongoose.Schema({
     firstName: String,
     lastName: String,
-    phoneNumber: String,
+    phoneNumber: String, 
     country: String,
-    email: String,
+    email: String, 
     password:String
-});
+}); 
 
 users.plugin(passportLocalMongoose)
 
-module.exports = mongoose.model("users", users);
+module.exports = mongoose.model("users", users);      

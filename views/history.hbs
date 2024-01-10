@@ -136,6 +136,7 @@
         <th>City of Accused</th>
         <th>District of Accused</th>
         <th>State of Accused</th>
+        <th>Further process</th>
     </tr>
 
     <!-- Placeholder for dynamic data from the server -->
@@ -164,11 +165,30 @@
         <td>{{this.acity}}</td>
         <td>{{this.adistrict}}</td>
         <td>{{this.astate}}</td>
+<td><button class="process" onclick="generatePDF('{{this.dis}}')">Further Process</button></td>
     </tr>
     {{/each}}
 </table>
 
+<!-- Modify the existing script block in history.hbs -->
+<!-- Modify the existing script block in history.hbs -->
+<!-- Modify the existing script block in history.hbs -->
+<!-- Modify the existing script block in history.hbs -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.process');
+
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            // Replace "#" with the URL or path to the server endpoint that generates the PDF
+            window.open('/generate-pdf', '_blank');
+        });
+    });
+});
+</script>
+
+
+
 
 </body>
-
 </html>
