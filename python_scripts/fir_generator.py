@@ -31,7 +31,7 @@ def generate_fir_pdf(complainant_info, offense_info):
 
     pdf.multi_cell(0, 10, txt=offense_info, align="L")
 
-    pdf.output("FIR_Report.pdf")
+    pdf.output("public/pdfs/FIR_Report.pdf")
 
 def main():
     # Ensure the correct number of command line arguments

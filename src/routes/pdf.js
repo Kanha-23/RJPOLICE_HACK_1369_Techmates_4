@@ -8,7 +8,7 @@ router.get('/generate-pdf', async (req, res) => {
 
         // Check if the offense is cognizable
         // You may need to implement logic to determine cognizability
-        const isCognizable = checkCognizable(dis);
+        const isCognizable = checkCognizable(dis); 
 
         if (isCognizable) {
             // Execute the Python script

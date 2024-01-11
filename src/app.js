@@ -72,7 +72,7 @@ app.post("/generate_fir", (req, res) => {
     console.error(`Python Script Error: ${data}`);
     res.status(500).send("Internal Server Error");
   });
-});
+}); 
  
 main().catch((err) => console.log(err));
 

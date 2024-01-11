@@ -180,15 +180,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     buttons.forEach(function (button) {
         button.addEventListener('click', function () {
-            // Replace "#" with the URL or path to the server endpoint that generates the PDF
-            window.open('/generate-pdf', '_blank');
+            // Trigger the PDF generation endpoint
+            fetch('/generate-pdf?dis=your_complaint_here')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // If successful, open a new window with the generated PDF
+                        window.open('public/pdfs/FIR_Report.pdf', '_blank');
+                    } else {
+                        console.error('Error generating PDF:', data.message);
+                        // Handle the error as needed
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle the error as needed
+                });
         });
     });
 });
 </script>
-
-
-
 
 </body>
 </html>
