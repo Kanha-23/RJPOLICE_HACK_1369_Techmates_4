@@ -165,11 +165,14 @@
         <td>{{this.acity}}</td>
         <td>{{this.adistrict}}</td>
         <td>{{this.astate}}</td>
-<td><button class="process" onclick="generatePDF('{{this.dis}}')">Further Process</button></td>
+        <td style="display: none;" class="complaint-id">{{this._id}}</td>
+<td><button class="process" onclick="generatePDF(this)">Further Process</button></td>
     </tr>
     {{/each}}
 </table>
 
+<!-- Modify the existing script block in history.hbs -->
+<!-- Modify the existing script block in history.hbs -->
 <!-- Modify the existing script block in history.hbs -->
 <!-- Modify the existing script block in history.hbs -->
 <!-- Modify the existing script block in history.hbs -->
@@ -180,8 +183,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     buttons.forEach(function (button) {
         button.addEventListener('click', function () {
+            // Get the closest row
+            const row = button.closest('tr');
+
+            // Get the complaintId (dis) from the row
+            const complaintId = row.querySelector('td:nth-child(12)').textContent;
+
             // Trigger the PDF generation endpoint
-            fetch('/generate-pdf?dis=your_complaint_here')
+            fetch(`/generate-pdf?dis=${encodeURIComponent(complaintId)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -200,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
 
 </body>
 </html>

@@ -4,6 +4,7 @@ from difflib import SequenceMatcher
 from fpdf import FPDF
 from pymongo import MongoClient
 
+
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
@@ -40,8 +41,8 @@ def main():
         print("Usage: python fir_generator.py <complaint>")
         sys.exit(1)
 
-    complaint = sys.argv[1]
-    print("Searching for complaint:", complaint)
+    complaint_id = sys.argv[1]
+    print("Searching for complaint:", complaint_id)
 
 
     # Connect to MongoDB
@@ -53,12 +54,14 @@ def main():
     with open("csvjson.json", "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    most_similar_section = find_most_similar_section(complaint, data)
+    most_similar_section = find_most_similar_section(complaint_id, data)
 
     if most_similar_section and most_similar_section["Cognizable"].lower() == "cognizable":
         # Retrieve complainant information from the database
-        complainant_data = collection.find_one({})
+        # Change the query to use _id
+        complainant_data = collection.find_one({ "dis": complaint_id })
 
+        print("Complaint Data:", complainant_data)
         if complainant_data:
             complainant_name = complainant_data["name"]
             complainant_age = complainant_data["age"]
