@@ -2,6 +2,7 @@ import sys
 import json
 from difflib import SequenceMatcher
 from fpdf import FPDF
+from pymongo import MongoClient
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
@@ -40,6 +41,13 @@ def main():
         sys.exit(1)
 
     complaint = sys.argv[1]
+    print("Searching for complaint:", complaint)
+
+
+    # Connect to MongoDB
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['RJPOLICE_HACK']  # Your database name
+    collection = db['complains']  # Your collection name
 
     # Load data from a JSON file containing offense sections
     with open("csvjson.json", "r", encoding="utf-8") as file:
@@ -48,58 +56,74 @@ def main():
     most_similar_section = find_most_similar_section(complaint, data)
 
     if most_similar_section and most_similar_section["Cognizable"].lower() == "cognizable":
-        complainant_info = """
-        [Complainant Information]
-        Name: John Doe
-        Age: 30
-        Occupation: Engineer
-        Residence: 123 Main St, Cityville
-        City: Cityville
-        Pin Code: 123456
-        Contact Information: 123-456-7890
-        Date: January 1, 2022
+        # Retrieve complainant information from the database
+        complainant_data = collection.find_one({})
 
-        To,
-        The Officer in Charge,
-        [Police Department/Station Name]
-        [Address of the Police Station]
-        [City, State, Zip Code]
+        if complainant_data:
+            complainant_name = complainant_data["name"]
+            complainant_age = complainant_data["age"]
+            complainant_occupation = complainant_data["occupation"]
+            complainant_residence = complainant_data["loc"]
+            complainant_city = complainant_data["city"]
+            complainant_pincode = complainant_data["pin"]
+            complainant_contact = complainant_data["number"]
+            complainant_date = complainant_data["date"].strftime("%B %d, %Y") if complainant_data["date"] else ""
 
-        Subject: First Information Report (FIR)
+            # Update the complainant_info string with dynamic values
+            complainant_info = f"""
+            [Complainant Information]
+            Name: {complainant_name}
+            Age: {complainant_age}
+            Occupation: {complainant_occupation}
+            Residence: {complainant_residence}
+            City: {complainant_city}
+            Pin Code: {complainant_pincode}
+            Contact Information: {complainant_contact}
+            Date: {complainant_date}
 
-        Sir/Madam,
+            To,
+            The Officer in Charge,
+            [Police Department/Station Name]
+            [Address of the Police Station]
+            [City, State, Zip Code]
 
-        [Complainant's Full Name], [Complainant's Age], [Complainant's Occupation], residing at [Complainant's Address], [City], [Pin Code], contactable at [Complainant's Contact Information], would like to file an FIR against [Accused's Full Name], [Accused's Age], [Accused's Occupation], residing at [Accused's Address], [City], [Pin Code], for the following criminal offenses committed on [Date and Time] at [Location]:
+            Subject: First Information Report (FIR)
 
-        [Description of the Offense]
+            Sir/Madam,
 
-        [Details of the Incident]
+            [{complainant_name}], [{complainant_age}], [{complainant_occupation}], residing at [{complainant_residence}], [{complainant_city}], [{complainant_pincode}], contactable at [{complainant_contact}], would like to file an FIR against [Accused's Full Name], [Accused's Age], [Accused's Occupation], residing at [Accused's Address], [City], [Pin Code], for the following criminal offenses committed on [Date and Time] at [Location]:
 
-        [Witness Information, if any]
+            [Description of the Offense]
 
-        [Additional Information]
+            [Details of the Incident]
 
-        I request the police to take immediate action against the accused and conduct a thorough investigation into the matter. I am willing to cooperate fully and provide any necessary information to assist in the investigation.
+            [Witness Information, if any]
 
-        Enclosed herewith are any supporting documents, if applicable.
+            [Additional Information]
 
-        Thank you for your prompt attention to this matter.
+            I request the police to take immediate action against the accused and conduct a thorough investigation into the matter. I am willing to cooperate fully and provide any necessary information to assist in the investigation.
 
-        Yours faithfully,
-        John Doe
-        123-456-7890
-        """
+            Enclosed herewith are any supporting documents, if applicable.
 
-        offense_info = f"""
-        Category of: {most_similar_section["Cognizable"]}
+            Thank you for your prompt attention to this matter.
 
-        [Other information you want to include about the offense]
-        [Include any details relevant to the offense]
-        """
+            Yours faithfully,
+            {complainant_name}
+            {complainant_contact}
+            """
 
-        generate_fir_pdf(complainant_info, offense_info)
-        print("FIR PDF generated successfully.")
+            offense_info = f"""
+            Category of: {most_similar_section["Cognizable"]}
 
+            [Other information you want to include about the offense]
+            [Include any details relevant to the offense]
+            """
+
+            generate_fir_pdf(complainant_info, offense_info)
+            print("FIR PDF generated successfully.")
+
+        else:
+            print("Complainant data not found in the database.")
     else:
         print("No matching or non-cognizable section found.")
 

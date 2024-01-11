@@ -1,16 +1,16 @@
 const express = require("express");
 const hbs = require("hbs");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const session = require("express-session");
-const flash = require("connect-flash");
-const passport = require("passport");
+const mongoose = require("mongoose");  
+const bodyParser = require("body-parser");      
+const session = require("express-session"); 
+const flash = require("connect-flash");      
+const passport = require("passport"); 
 const LocalStrategy = require("passport-local").Strategy;
 const child_process = require("child_process");
 const pdfRoute = require('./routes/pdf'); 
-const mainRoute = require("./routes/main");
+const mainRoute = require("./routes/main"); 
 const User = require("./models/users");
-const userRoute = require("./routes/user");
+const userRoute = require("./routes/user");       
 const authMiddleware = require("./controller/authMiddleware");
 const dashboardRoute = require("./routes/dashboard");
 const complainformRoute = require("./routes/complainform");
@@ -29,10 +29,10 @@ app.use(
     secret: "your-secret-key", // Change this to a strong, random string
     resave: false,
     saveUninitialized: false,
-  })
-);
-
-app.use(passport.initialize());
+  }) 
+); 
+  
+app.use(passport.initialize());  
 app.use(passport.session());
 app.use('', pdfRoute);
 passport.use(User.createStrategy());
@@ -42,14 +42,14 @@ passport.deserializeUser(User.deserializeUser());
 app.set("view engine", "hbs");
 app.set("views", "views");
 hbs.registerPartials("views/partials");
-hbs.registerHelper("eq", function (v1, v2) {
+hbs.registerHelper("eq", function (v1, v2) { 
   return v1 === v2;
 });
-
+  
 // Your existing routes
 app.use("", dashboardRoute);
 app.use("", mainRoute);
-app.use("", userRoute);
+app.use("", userRoute);  
 app.use("", complainformRoute);
 app.use("", historyRoute);
 app.use('/generate-pdf', generatePDFRoute);
@@ -68,7 +68,7 @@ app.post("/generate_fir", (req, res) => {
     res.send(data);
   });
 
-  pythonProcess.stderr.on("data", (data) => {
+  pythonProcess.stderr.on("data", (data) => {  
     console.error(`Python Script Error: ${data}`);
     res.status(500).send("Internal Server Error");
   });
