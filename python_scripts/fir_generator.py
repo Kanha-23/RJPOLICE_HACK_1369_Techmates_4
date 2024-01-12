@@ -25,8 +25,8 @@ def generate_fir_pdf(complainant_info, offense_info):
     pdf.add_page()
     pdf.set_font("Arial", size=12)
 
-    pdf.cell(200, 10, txt="First Information Report (FIR)", ln=1, align="C")
-    pdf.ln(10)
+    # pdf.cell(200, 10, txt="First Information Report (FIR)", ln=1, align="C")
+    # pdf.ln(10)
 
     pdf.multi_cell(0, 10, txt=complainant_info, align="L")
     pdf.ln(10)
@@ -55,6 +55,8 @@ def main():
         data = json.load(file)
 
     most_similar_section = find_most_similar_section(complaint_id, data)
+    
+    offense_info = ""  # Declare offense_info outside the if-else blocks
 
     if most_similar_section and most_similar_section["Cognizable"].lower() == "cognizable":
         # Retrieve complainant information from the database
@@ -82,6 +84,8 @@ def main():
 
             # Update the complainant_info string with dynamic values
             complainant_info = f"""
+                                                   First Information Report (FIR)         
+                                                    
             [Complainant Information]
             Name: {complainant_name}
             Age: {complainant_age}
@@ -129,6 +133,92 @@ def main():
             print("Complainant data not found in the database.")
     else:
         print("No matching or non-cognizable section found.")
+        complainant_data = collection.find_one({ "dis": complaint_id })
+
+        if complainant_data:
+            complainant_name = complainant_data["name"]
+            complainant_age = complainant_data["age"]
+            complainant_occupation = complainant_data["occupation"]
+            complainant_city = complainant_data["city"]
+            complainant_pincode = complainant_data["pin"]
+            complainant_contact = complainant_data["number"]
+            complainant_date = complainant_data["date"].strftime("%B %d, %Y") if complainant_data["date"] else ""
+            complainant_dis = complainant_data["dis"]
+            complainant_loc = complainant_data["loc"]
+            complainant_details = complainant_data["detail"]
+            accused_name = complainant_data["aname"]
+            accused_age = complainant_data["aage"]
+            accused_occupation = complainant_data["aoccupation"]
+            accused_city = complainant_data["acity"]
+            accused_address = complainant_data["aaddress"]
+
+            # Update the complainant_info string with dynamic values for court warrant or FIR
+            complainant_info = f"""
+            AS FOLLOWING COMPLAIN FALLS UNDER NON COGNIZABLE OFFENCES SEARCH WARRANT APPROVAL REQUIRE TO START INVESTIGATION ABOUT THIS CASE. FILL THE DETAILS AS GUIDED
+
+                                               [Your Police Department's Letterhead]
+
+                                                           SEARCH WARRANT
+
+
+            To: __________________[Judge's Full Name]
+                __________________[Judge's Title]
+                __________________[Address of the Court]
+
+            Application for a Search Warrant
+
+            I, ________________[Your Full Name], __________________[Your Rank/Title] of the ____________________[Your Police Department], hereby apply for a search warrant to search the premises located at:
+
+            [{accused_address} , {accused_city}]___________
+
+            This application is based upon the following grounds:
+
+            1. [{complainant_dis}]
+
+            2. ______________________________________________________[Provide specific information justifying the need for a search]
+
+            3. ______________________________________________________[Include any witness statements or other supporting evidence]
+
+            I believe that the following items related to the criminal activity are present on the premises:
+
+            ___________________________________________________________[List the items to be searched for, e.g., illegal substances, weapons, etc.]
+
+            The supporting affidavit and any other documents are attached herewith.
+
+            I request that the search warrant be issued to authorize [Your Name] and other officers named in the attached affidavit to enter the premises, search for the items described, and seize any evidence related to the criminal activity.
+            I declare under penalty of perjury that the foregoing is true and correct.
+
+            Date: [Current Date]
+            Place: [City/Location]
+
+            ____________________[Your Full Name]
+            ____________________[Your Rank/Title]
+            ____________________[Your Signature]
+
+            ---------------
+            [Judge's Response Section]
+
+            Search Warrant
+
+            To: ______________________________[Your Full Name]
+                ______________________________[Your Rank/Title]
+                ______________________________[Your Police Department]
+
+            Upon consideration of the application and supporting affidavit, I find probable cause to believe that the items described are located on the premises identified. Therefore, you are hereby authorized to execute the search warrant at the premises listed above.
+
+            This warrant is valid for execution between [Start Date and Time] and [End Date and Time].
+
+            ___________________[Judge's Full Name]
+            ___________________[Judge's Signature]
+            ___________________[Date Issued]
+
+            """
+            # offense_info can be populated with relevant information for court warrant or FIR
+
+            generate_fir_pdf(complainant_info, offense_info)
+            print("Court Warrant / FIR PDF generated successfully.")
+        else:
+            print("Complainant data not found in the database.")
 
 if __name__ == "__main__":
     main()
