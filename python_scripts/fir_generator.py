@@ -66,11 +66,19 @@ def main():
             complainant_name = complainant_data["name"]
             complainant_age = complainant_data["age"]
             complainant_occupation = complainant_data["occupation"]
-            complainant_residence = complainant_data["loc"]
             complainant_city = complainant_data["city"]
             complainant_pincode = complainant_data["pin"]
             complainant_contact = complainant_data["number"]
             complainant_date = complainant_data["date"].strftime("%B %d, %Y") if complainant_data["date"] else ""
+            complainant_dis = complainant_data["dis"]
+            complainant_loc = complainant_data["loc"]
+            complainant_details = complainant_data["detail"]
+            accused_name=complainant_data["aname"]
+            accused_age=complainant_data["aage"]
+            accused_occupation=complainant_data["aoccupation"]
+            accused_city=complainant_data["acity"]
+            accused_address=complainant_data["aaddress"]
+
 
             # Update the complainant_info string with dynamic values
             complainant_info = f"""
@@ -78,7 +86,6 @@ def main():
             Name: {complainant_name}
             Age: {complainant_age}
             Occupation: {complainant_occupation}
-            Residence: {complainant_residence}
             City: {complainant_city}
             Pin Code: {complainant_pincode}
             Contact Information: {complainant_contact}
@@ -86,23 +93,18 @@ def main():
 
             To,
             The Officer in Charge,
-            [Police Department/Station Name]
-            [Address of the Police Station]
-            [City, State, Zip Code]
+            {complainant_city} Police,
 
-            Subject: First Information Report (FIR)
+            Subject: {complainant_dis}
 
             Sir/Madam,
 
-            [{complainant_name}], [{complainant_age}], [{complainant_occupation}], residing at [{complainant_residence}], [{complainant_city}], [{complainant_pincode}], contactable at [{complainant_contact}], would like to file an FIR against [Accused's Full Name], [Accused's Age], [Accused's Occupation], residing at [Accused's Address], [City], [Pin Code], for the following criminal offenses committed on [Date and Time] at [Location]:
+            [{complainant_name}], [{complainant_age}], [{complainant_occupation}], residing at [{complainant_city}], [{complainant_pincode}], contactable at [{complainant_contact}], would like to file an FIR against {accused_name}, {accused_age}, {accused_occupation}, residing at {accused_address}, {accused_city} , for the following criminal offenses committed on {complainant_date} at {complainant_loc}:
 
             [Description of the Offense]
 
-            [Details of the Incident]
+            {complainant_details}
 
-            [Witness Information, if any]
-
-            [Additional Information]
 
             I request the police to take immediate action against the accused and conduct a thorough investigation into the matter. I am willing to cooperate fully and provide any necessary information to assist in the investigation.
 
@@ -118,8 +120,6 @@ def main():
             offense_info = f"""
             Category of: {most_similar_section["Cognizable"]}
 
-            [Other information you want to include about the offense]
-            [Include any details relevant to the offense]
             """
 
             generate_fir_pdf(complainant_info, offense_info)
