@@ -13,12 +13,21 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
             min-height: 100vh;
         }
-
+    .navbar{
+      background-color: #141E46;
+      display:flex;
+      justify-content: space-between;
+    }
+    .logo{
+      color:white;
+      margin: 5px;
+      margin-left: 10px;
+    }
         header {
-            background-color: #007bff;
+            align-items: center;
+            background-color: #141E46;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -28,7 +37,13 @@
             top: 0;
             z-index: 1;
         }
-
+        .container{
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container h2{
+            font-size: 30px;
+        }
         main {
             margin-top: 80px;
             /* Adjust based on header height */
@@ -46,7 +61,7 @@
         }
 
         table {
-            width: 100%;
+            width: fit-content;
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -58,11 +73,11 @@
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            min-width: 150px;
+            width:fit-content ;
         }
 
         th {
-            background-color: #007bff;
+            background-color: #141E46;
             color: #fff;
         }
 
@@ -83,20 +98,30 @@
         button {
             padding: 10px 16px;
             cursor: pointer;
-            background-color: #007bff;
+            background-color: #141E46;
             color: #fff;
             border: none;
             border-radius: 5px;
             font-size: 16px;
         }
+
+        button:hover{
+            opacity: 90%;
+        }
     </style>
 </head>
 
 <body>
-    <h2>Complain Record</h2> 
-
+    <nav class="navbar">
+      <div class="logo"><h2>Rajasthan Police.</h2></div>
+    </nav>
+     
+    <div class="container">
+        <h2>Complaint Record</h2>
+   
     <!-- Search Form -->
     <form action="/history/search" method="post">
+        
         <label for="searchTerm">Search:</label>
         <input type="text" id="searchTerm" name="searchTerm" placeholder="Enter search term">
 
@@ -170,7 +195,7 @@
     </tr>
     {{/each}}
 </table>
-
+ </div>
 <!-- Modify the existing script block in history.hbs -->
 <!-- Modify the existing script block in history.hbs -->
 <!-- Modify the existing script block in history.hbs -->
