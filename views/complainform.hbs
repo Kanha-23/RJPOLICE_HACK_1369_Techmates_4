@@ -14,23 +14,29 @@
             background-color: #f8f9fa;
             color: #333;
         }
-
+        
+    .navbar{
+      background-color: #141E46;
+      display:flex;
+      justify-content: space-between;
+    }
+    .logo{
+      color:white;
+      margin: 5px;
+      margin-left: 10px;
+    }
         .complaint-form {
-            background: linear-gradient(to right, #1a237e, #dc3545);
-            color: #fff;
-            padding: 20px;
+            color: #141E46;
             text-align: center;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
         }
 
         .form-container {
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 1250px;
+            margin: 40px auto;
             background-color: #fff;
-            padding: 20px;
+            padding: 40px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
+            border-radius: 5px;
         }
 
         .form-input {
@@ -38,7 +44,7 @@
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 3px;
             box-sizing: border-box;
             font-size: 16px;
         }
@@ -53,78 +59,60 @@
         }
 
         .form-submit {
-            background-color: #000;
             color: #fff;
             padding: 15px 30px;
             border: none;
-            border-radius: 8px;
+            border-radius: 2px;
             cursor: pointer;
             font-size: 18px;
+            background-color: #141E46;
             transition: background-color 0.3s;
+            width: 1200px;
         }
 
         .form-submit:hover {
-            background-color: #007bff;
+            opacity: 90%;
+        }
+
+        .form-container p{
+            text-transform: uppercase;
+            margin: 30px;
         }
     </style>
 </head>
 <body>
-
+    <nav class="navbar">
+      <div class="logo"><h2>Rajasthan Police.</h2></div>
+    </nav>
     <div class="complaint-form">
-        <h1>Rajasthan Police - Complaint Form</span></h1>
+        <h1>Complaint Form</h1>
+        
     </div>
 
     <div class="form-container">
         <form action="/complainform" method="post">
+            <p>Complainant details</p>
             <!-- Name of person reporting incident -->
-            <input type="text" name="name" class="form-input" placeholder="Name of Complainant*" required>
+            <input type="text" name="name" class="form-input" placeholder="Name of Complainant" required>
 
             <!-- Phone number -->
-            <input type="tel" name="number" class="form-input" placeholder="Phone Number*" required>
+            <input type="tel" name="number" class="form-input" placeholder="Phone Number" required>
 
             <!-- Email -->
-            <input type="email" name="email" class="form-input" placeholder="Email*" required>
-
-            <!-- Date of incident -->
-            <input type="date" name="date" class="form-input" required>
+            <input type="email" name="email" class="form-input" placeholder="Email" required>
 
             <!-- Address of complainant -->
-            <input type="text" name="address" class="form-input" placeholder="Address of complainant*" required>
+            <input type="text" name="address" class="form-input" placeholder="Address of complainant" required>
 
             <!-- Occupation of complainant -->
-            <input type="text" name="occupation" class="form-input" placeholder="Occupation of complainant*" required>
+            <input type="text" name="occupation" class="form-input" placeholder="Occupation of complainant" required>
 
             
             <!-- Age of complainant -->
-            <input type="number" name="age" class="form-input" placeholder="Age of complainant*" required>
-
-            <!-- Location of incident -->
-            <input type="text" name="loc" class="form-input" placeholder="Location of Incident*" required>
-
-            <!-- Pincode -->
-            <input type="text" name="pin" class="form-input" placeholder="Pincode*" required>
-
-            <!-- City -->
-            <input type="text" name="city" class="form-input" placeholder="City*" required>
-
-            <!-- State -->
-            <input type="text" name="district" class="form-input" placeholder="district*" required>
-
-            <!-- Country -->
-            <input type="text" name="state" class="form-input" placeholder="State*" required>
-
-            <!-- Describe the incident -->
-            <textarea class="form-input" name="dis" placeholder="Describe (one line)*" required></textarea>
-
+            <input type="number" name="age" class="form-input" placeholder="Age of complainant" required>
             
-            <!-- Describe the incident detail -->
-            <textarea class="form-input" name="detail" placeholder="Describe incident in detail*" required></textarea>
-
-            <!-- Number of people involved -->
-            <input type="number" name="people" class="form-input" placeholder="Number of People Involved*" required>
-
             <!-- Select identity proof -->
-            <div class="form-radio-label">Select Identity Proof*:
+            <div class="form-radio-label">Select Identity Proof:
                 <label class="form-radio-input">
                     <input type="radio" name="identityProof" value="aadhar"> Aadhar Card
                 </label>
@@ -139,27 +127,57 @@
             <!-- Upload identity proof --> 
             <input type="text" name="proof" class="form-input" placeholder="Enter Identity Proof Number" required>
 
-            <!-- Name of accused  -->
-            <input type="text" name="aname" class="form-input" placeholder="Name of Accused if known*" required>
+            <p>Incident Details</p>
+            <!-- Date of incident -->
+            <input type="date" name="date" class="form-input" required>
 
-            <!-- age of accused  -->
-            <input type="number" name="aage" class="form-input" placeholder="age of accused *" required>
+            <!-- Location of incident -->
+            <input type="text" name="loc" class="form-input" placeholder="Location of Incident" required>
 
-            <!-- Occupation of accused -->
-            <input type="text" name="aoccupation" class="form-input" placeholder="Occupation of accused*" required>
-            
-            <!-- Address of complainant -->
-            <input type="text" name="aaddress" class="form-input" placeholder="Address of accused*" required>
+            <!-- Pincode -->
+            <input type="text" name="pin" class="form-input" placeholder="Pincode" required>
 
-            
             <!-- City -->
-            <input type="text" name="acity" class="form-input" placeholder="Accused City*" required>
+            <input type="text" name="city" class="form-input" placeholder="City" required>
 
             <!-- State -->
-            <input type="text" name="adistrict" class="form-input" placeholder="Accused district*" required>
+            <input type="text" name="district" class="form-input" placeholder="district" required>
 
             <!-- Country -->
-            <input type="text" name="astate" class="form-input" placeholder="Accused State*" required>
+            <input type="text" name="state" class="form-input" placeholder="State" required>
+
+            <!-- Describe the incident -->
+            <textarea class="form-input" name="dis" placeholder="Describe(one-line)" required></textarea>
+
+            
+            <!-- Describe the incident detail -->
+            <textarea class="form-input" name="detail" placeholder="Describe incident in detail" required></textarea>
+
+            <!-- Number of people involved -->
+            <input type="number" name="people" class="form-input" placeholder="Number of People Involved" required>
+
+            
+            <p>Accused Details</p>
+            <!-- Name of accused  -->
+            <input type="text" name="aname" class="form-input" placeholder="Name of Accused(if known)" required>
+ 
+            <!-- age of accused  -->
+            <input type="number" name="aage" class="form-input" placeholder="age of accused" required>
+
+            <!-- Occupation of accused -->
+            <input type="text" name="aoccupation" class="form-input" placeholder="Occupation of accused" required>
+            
+            <!-- Address of complainant -->
+            <input type="text" name="aaddress" class="form-input" placeholder="Address of accused" required>
+            
+            <!-- City -->
+            <input type="text" name="acity" class="form-input" placeholder="Accused City" required>
+
+            <!-- State -->
+            <input type="text" name="adistrict" class="form-input" placeholder="Accused district" required>
+
+            <!-- Country -->
+            <input type="text" name="astate" class="form-input" placeholder="Accused State" required>
 
             <!-- Submit button -->
             <button type="submit" class="form-submit">Submit</button>
