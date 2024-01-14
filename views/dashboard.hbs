@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0; 
+            margin: 0;
             padding: 0;
             background-color: #f4f4f4;
         }
@@ -53,42 +54,81 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="dashboard">
-    <h1>Rajasthan Police Dashboard</h1>
-</div>
-
-<div class="tabs">
-    <a href="/complainform" class="tab" onclick="showTab('fileComplaint')"><i class="fas fa-bullhorn"></i> File Complaint</a>
-    <a href="/history" class="tab" onclick="showTab('history')"><i class="fas fa-history"></i> History</a>
-    <a href="#" class="tab" onclick="showTab('logout')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-</div>
-
-<div class="content">
-    <!-- Content for File Complaint Tab -->
-    <div id="fileComplaint" style="display: none;">
-        <h2>File Complaint</h2>
-        <!-- Add form or content for filing a complaint here -->
+    <div class="dashboard">
+        <h1>Rajasthan Police Dashboard</h1>
     </div>
 
-    <!-- Content for History Tab -->
-    <div id="history" style="display: none;">
-        <h2>History</h2>
-        <!-- Add content for viewing complaint history here -->
+    <div class="tabs">
+        <a href="/complainform" class="tab" onclick="showTab('fileComplaint')"><i class="fas fa-bullhorn"></i> File
+            Complaint</a>
+        <a href="/history" class="tab" onclick="showTab('history')"><i class="fas fa-history"></i> History</a>
+        <a href="#" class="tab" onclick="showTab('logout')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        <a href="#" class="tab" onclick="showTab('performOCR')"><i class="fas fa-upload"></i> Perform OCR</a>
     </div>
 
-    <!-- Content for Logout Tab -->
-    <div id="logout" style="display: none;">
-        <h2>Log Out</h2>
-        <!-- Add content for logging out here -->
-    </div>
-</div>
+    <div class="content">
+        <!-- Content for File Complaint Tab -->
+      
 
-<div class="statistics">
-    <h2>Complaint Statistics</h2>
-    <!-- Add statistical representations of complaints here -->
-</div>
+        <!-- Content for History Tab -->
+      
+
+        <!-- Content for Logout Tab -->
+      
+
+        <div id="performOCR" style="display: none;">
+            <h2>Perform OCR</h2>
+            <form id="ocrForm" action="/perform_ocr" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileToOCR" id="fileToOCR">
+                <button type="submit">Perform OCR</button>
+            </form>
+
+
+
+
+            <div id="ocrOutput" style="white-space: pre-line;">
+                <h3>OCR Output:</h3>
+                <pre id="ocrResult"></pre>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="statistics">
+        <h2>Complaint Statistics</h2>
+        <!-- Add statistical representations of complaints here -->
+    </div>
+
+    <!-- ... (previous code) -->
+    <script>
+
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tabContent => {
+                tabContent.style.display = 'none';
+            });
+
+            // Show the selected tab
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+            }
+        }
+
+        // Initially, show the first tab (adjust if needed)
+        window.onload = function () {
+            showTab('fileComplaint');
+        };
+
+
+    </script>
+
 </body>
-</html>
 
+</html>

@@ -60,7 +60,7 @@ const complainFormSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
-  detail: {
+  detail: {  
     type: String,
   },
   aname: {

@@ -11,7 +11,7 @@ def similar(a, b):
 def find_most_similar_section(complaint, sections):
     max_similarity = 0
     most_similar_section = None
-
+    
     for section in sections:
         similarity = similar(complaint, section["Offense"])
         if similarity > max_similarity:

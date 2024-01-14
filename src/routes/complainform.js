@@ -20,7 +20,7 @@ router.post('/complainform', async (req, res, next) => {
             address: req.body.address,
             occupation: req.body.occupation,
             age: req.body.age,
-            loc: req.body.loc,
+            loc: req.body.loc, 
             pin: req.body.pin,
             city: req.body.city,
             district: req.body.district,
