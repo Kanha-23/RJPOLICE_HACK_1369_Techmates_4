@@ -84,7 +84,8 @@ def main():
 
             # Update the complainant_info string with dynamic values
             complainant_info = f"""
-                                                   First Information Report (FIR)         
+                                                   First Information Report (FIR)  
+
                                                     
             [Complainant Information]
             Name: {complainant_name}
@@ -94,17 +95,23 @@ def main():
             Pin Code: {complainant_pincode}
             Contact Information: {complainant_contact}
             Date: {complainant_date}
-
+            
+            
             To,
+
             The Officer in Charge,
             {complainant_city} Police,
 
-            Subject: {complainant_dis}
 
             Sir/Madam,
 
             [{complainant_name}], [{complainant_age}], [{complainant_occupation}], residing at [{complainant_city}], [{complainant_pincode}], contactable at [{complainant_contact}], would like to file an FIR against {accused_name}, {accused_age}, {accused_occupation}, residing at {accused_address}, {accused_city} , for the following criminal offenses committed on {complainant_date} at {complainant_loc}:
 
+            
+
+            
+            Subject: {complainant_dis}
+            
             [Description of the Offense]
 
             {complainant_details}

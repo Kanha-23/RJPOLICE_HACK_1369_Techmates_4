@@ -71,32 +71,37 @@
 
     <div class="content">
         <!-- Content for File Complaint Tab -->
-      
-
-        <!-- Content for History Tab -->
-      
-
-        <!-- Content for Logout Tab -->
-      
-
-        <div id="performOCR" style="display: none;">
-            <h2>Perform OCR</h2>
-            <form id="ocrForm" action="/perform_ocr" method="post" enctype="multipart/form-data">
-                <input type="file" name="fileToOCR" id="fileToOCR">
-                <button type="submit">Perform OCR</button>
-            </form>
-
-
-
-
-            <div id="ocrOutput" style="white-space: pre-line;">
-                <h3>OCR Output:</h3>
-                <pre id="ocrResult"></pre>
-            </div>
+        <div id="fileComplaint">
+            <!-- Your content for File Complaint Tab goes here -->
         </div>
 
+        <!-- Content for History Tab -->
+        <div id="history" style="display: none;">
+            <!-- Your content for History Tab goes here -->
+        </div>
 
+        <!-- Content for Logout Tab -->
+        <div id="logout" style="display: none;">
+            <!-- Your content for Logout Tab goes here -->
+        </div>
+
+        <!-- Content for Perform OCR Tab -->
+        <div id="performOCR" style="display: none;">
+            <h2>Perform OCR</h2>
+            <form id="ocrForm" enctype="multipart/form-data" action="/performOCR" method="post">
+    <input type="file" name="fileToOCR" id="fileToOCR">
+    <button type="submit">Perform OCR</button>
+</form>
+
+            <!-- Display OCR output -->
+            <div id="ocrOutputContainer" style="display: none;">
+                <h2>OCR Output</h2>
+                <pre id="ocrOutput"></pre>
+            </div>
+        </div>
     </div>
+
+
 
 
 
@@ -105,9 +110,8 @@
         <!-- Add statistical representations of complaints here -->
     </div>
 
-    <!-- ... (previous code) -->
     <script>
-
+   
         function showTab(tabId) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tabContent => {
@@ -125,10 +129,7 @@
         window.onload = function () {
             showTab('fileComplaint');
         };
-
-
     </script>
-
 </body>
 
 </html>
