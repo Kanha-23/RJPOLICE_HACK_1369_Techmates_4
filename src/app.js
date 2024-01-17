@@ -29,7 +29,7 @@ function runPythonScriptAsync(scriptPath, ...args) {
     const pythonProcess = spawn('python', [scriptPath, ...args]);
 
     let output = [];
-    let errorOutput = [];
+    let errorOutput = []; 
 
     pythonProcess.stdout.on('data', (data) => {
       output.push(data.toString());
@@ -49,7 +49,7 @@ function runPythonScriptAsync(scriptPath, ...args) {
   });
 }
 
-
+ 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
@@ -86,10 +86,9 @@ app.use("", userRoute);
 app.use("", complainformRoute);  
 app.use("", historyRoute);
 app.use('/generate-pdf', generatePDFRoute);
-app.use("", webpageRoute);     
+app.use("", webpageRoute);        
 
-   
- 
+
 // Inside the /performOCR route handler
 app.post("/performOCR", async (req, res) => {
   try {
@@ -107,7 +106,7 @@ app.post("/performOCR", async (req, res) => {
 
     // Split the extracted text into lines
     const lines = extracted_text.split('\n'); 
-    console.log(extracted_text)
+     
 
     // Pass the lines to the webpage view
     res.render("webpage", { extractedTextLines: lines });
@@ -118,7 +117,7 @@ app.post("/performOCR", async (req, res) => {
 });
 
 
- 
+  
 
  
 
