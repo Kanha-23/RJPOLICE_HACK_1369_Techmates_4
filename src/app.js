@@ -90,33 +90,33 @@ app.use("", webpageRoute);
 
    
  
+// Inside the /performOCR route handler
 app.post("/performOCR", async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
     }
- 
+
     const image_path = path.join(__dirname, "..", "public", "uploads", req.file.filename);
 
     const extracted_text = await runPythonScriptAsync('python_scripts/merge.py', image_path);
- 
+
     if (!extracted_text) {
       return res.status(500).send("No relevant text extracted.");
     }
 
-    // Split the extracted text into lines and send each line separately
-    const lines = extracted_text.split('\n');
+    // Split the extracted text into lines
+    const lines = extracted_text.split('\n'); 
+    console.log(extracted_text)
 
-    // Now you can send each line as a separate response
-    lines.forEach(line => res.write(line + '\n'));
-
-    // End the response after sending all lines
-    res.end();
+    // Pass the lines to the webpage view
+    res.render("webpage", { extractedTextLines: lines });
   } catch (error) {
-    console.error(error); 
+    console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
  
 

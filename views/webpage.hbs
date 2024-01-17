@@ -7,6 +7,9 @@
 </head>
 <body>
     <h1>Webpage Content</h1>
-    <p>{{ extractedText }}</p>
+
+    {{#each extractedTextLines}}
+        <p>{{ this }}</p>
+    {{/each}}
 </body>
 </html>
